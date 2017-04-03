@@ -47,8 +47,10 @@ var dappleth = (function(){
 		var isAttended = dappContract.isAttended(addr);
 		var isPaid = dappContract.isPaid(addr);
 		var payout = dappContract.participants(addr);
-
+		var name = dappContract.name();
+		
 		angular.element(document.querySelector('#Status')).html(status);
+		angular.element(document.querySelector('#event')).html(name);
 
 		if (isAttended){
         	btnRight.attr('style','visibility:true');
@@ -104,7 +106,7 @@ var dappleth = (function(){
 
 	function listner(){
         //event listner
-        eRegister = dappContract.RegisterEvent().watch(function (error, result) {
+        eRegister = dappContract.Register().watch(function (error, result) {
 	      if(!error){
 			var addr = result.addr;
             var user = result.participantName;
@@ -120,7 +122,7 @@ var dappleth = (function(){
           }
         });
 
-        eAttend = dappContract.AttendEvent().watch(function (error, result) {
+        eAttend = dappContract.Attend().watch(function (error, result) {
 		  if(!error){      
             var addr = result.addr;
             var msg = {
@@ -135,7 +137,7 @@ var dappleth = (function(){
           }
         });
 
-        ePayback = dappContract.PaybackEvent().watch(function (error, result) {
+        ePayback = dappContract.Payback().watch(function (error, result) {
 		   if(!error){
 			var addr = result.addr;
             var msg = {

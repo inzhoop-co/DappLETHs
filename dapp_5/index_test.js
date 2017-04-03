@@ -47,6 +47,9 @@ var dappleth = (function(){
 		var isAttended = dappContract.isAttended(addr);
 		var isPaid = dappContract.isPaid(addr);
 		var payout = dappContract.participants(addr);
+		var name = dappContract.name();
+		
+		angular.element(document.querySelector('#event')).html(name);
 
 		/*
 		1. 'not registered' if isRegistered(address) == false
