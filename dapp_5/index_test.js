@@ -94,45 +94,50 @@ var dappleth = (function(){
 	function listner(){
         //event listner
         eRegister = dappContract.RegisterEvent().watch(function (error, result) {
+			if(!error){
+				var addr = result.addr;
+	            var user = result.participantName;
+	            var msg = {
+	                from: addr,
+	                text: 'Here I am, registered!',
+	                date: new Date()
+	            };
 
-						var addr = result.addr;
-            var user = result.participantName;
-            var msg = {
-                from: addr,
-                text: 'Here I am, registered!',
-                date: new Date()
-            };
+	            apiChat.sendDappMessage(msg, GUID);
 
-            apiChat.sendDappMessage(msg, GUID);
-
-            update();
+	            update();
+	        }
         });
 
         eAttend = dappContract.AttendEvent().watch(function (error, result) {
+			if(!error){
+	            var addr = result.addr;
+	            var msg = {
+	                from: addr,
+	                text: 'New Attend!',
+	                date: new Date()
+	            };
 
-            var addr = result.addr;
-            var msg = {
-                from: addr,
-                text: 'New Attend!',
-                date: new Date()
-            };
+	            apiChat.sendDappMessage(msg, GUID);
 
-            apiChat.sendDappMessage(msg, GUID);
+	            update();
 
-            update();
+	        }
         });
 
         ePayback = dappContract.PaybackEvent().watch(function (error, result) {
-            var addr = result.addr;
-            var msg = {
-                from: addr,
-                text: 'Payback ' + result._payout + '!',
-                date: new Date()
-            };
+			if(!error){            
+	            var addr = result.addr;
+	            var msg = {
+	                from: addr,
+	                text: 'Payback ' + result._payout + '!',
+	                date: new Date()
+	            };
 
-            apiChat.sendDappMessage(msg, GUID);
+	            apiChat.sendDappMessage(msg, GUID);
 
-            update();
+	            update();
+	        }
         });
     }
 
