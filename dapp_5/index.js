@@ -208,13 +208,14 @@ var dappleth = (function(){
 
 	function register() {
 		var name = angular.element(document.querySelector('#handleName'))[0].value;
+		var invitation_code = angular.element(document.querySelector('#handleInvitationCode'))[0].value;
         var fromAddr = apiApp.account();
         var functionName = 'register';
         var args = JSON.parse('[]');
         var value = deposit;
         var gasPrice = web3.eth.gasPrice;
         var gas = 300000;
-        args.push(name,{from: fromAddr, to: confAddr, value: value, gasPrice: gasPrice, gas: gas});
+        args.push(name,invitation_code,{from: fromAddr, to: confAddr, value: value, gasPrice: gasPrice, gas: gas});
         var callback = function (err, txhash) {
             if(err){
 	            console.log('error: ' + err);
