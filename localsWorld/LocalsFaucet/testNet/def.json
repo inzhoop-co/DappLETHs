@@ -1,0 +1,28 @@
+{
+	"categories":[
+		{
+			"Name": "Generic",
+			"Description": "",
+			"Network" : "Ropsten",
+			"List":["T03"]
+		}
+		]
+
+	"dappleths":[
+		{
+			"GUID" : "T03",
+			"Name" : "Locals Faucet",
+			"Network" : "Ropsten",
+			"Company" : "Locals World",
+			"Address" : "0x687422eea2cb73b5d3e242ba5456b782919afc85",
+			"ABI" : [{}],
+			"Chatboard" : true,
+			"Logo" : "https://avatars1.githubusercontent.com/u/17782182?v=3&s=200",
+			"Description" : "Testnet faucet",
+			"InstallUrl" : "/dapp_3/index.html",
+			"TemplateUrl" : "/dapp_3/index.html",
+			"ScriptUrl" : "/dapp_3/index.js"
+		}
+		]
+}		
+		
