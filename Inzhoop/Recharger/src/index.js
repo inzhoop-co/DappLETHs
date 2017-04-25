@@ -18,9 +18,9 @@ var dappleth = (function(){
 
 	function setup(){
 		console.log("setup");
-		btnRight.html(' Redeem');
+		btnRight.html(' Recharge');
 		btnRight.attr('class','button button-smal button-icon icon ion-play');
-		btnRight.attr('onclick','dappleth.redeem()');
+		btnRight.attr('onclick','dappleth.recharge()');
 
 		btnLeft.html(' Create');
 		btnLeft.attr('class','button button-smal button-icon');
@@ -63,6 +63,7 @@ var dappleth = (function(){
 			};
 
     	  	apiChat.sendDappMessage(m1, GUID); 
+    	  	update();
 	    }else{
 
 			var opts={
@@ -96,8 +97,8 @@ var dappleth = (function(){
 		}
 	}
 
-	function redeem(){
-		console.log("redeem");
+	function recharge(){
+		console.log("recharge");
 		fee=1060020000000000;
 		var from = redeemAddr;
 		var to = apiApp.account();
@@ -157,7 +158,7 @@ var dappleth = (function(){
 	    update: update,
 	    run: run,
 	    destroy: destroy,
-	    redeem: redeem,
+	    recharge: recharge,
 	    create: create
 
 	};
