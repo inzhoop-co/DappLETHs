@@ -1,0 +1,28 @@
+{
+	"categories":[
+		{
+			"Name": "Developing",
+			"Description": "",
+			"Network" : "Ropsten",
+			"List":["T0X"]
+		}
+	],
+	"dappleths":[
+		{
+			"GUID" : "T0X",
+			"Name" : "ETHER CARDS",
+			"Network" : "Ropsten",
+			"Company" : "Dream Team",
+			"Address" : "0x",
+			"ABI" : "",
+			"Chatboard" : true,
+			"Logo" : "/dappleths/dapp_1/logo.png",
+			"Description" : "Ether Card redeem",
+			"InstallUrl" : "/dapp_1/index.html",
+			"TemplateUrl" : "/dapp_1/index.html",
+			"ScriptUrl" : "/dapp_1/index.js"
+		}	
+				
+	]
+}
+		

@@ -1,0 +1,27 @@
+{
+	"categories":[
+		{
+			"Name": "Generic",
+			"Description": "",
+			"Network" : "Ropsten",
+			"List":["T01"]
+		}
+		]
+
+	"dappleths":[
+		{
+			"GUID" : "T01",
+			"Name" : "Greeting",
+			"Network" : "Ropsten",
+			"Company" : "Inzhoop",
+			"Address" : "0xf8374f01dd4960a6ea6192f36f451e111cabf3b3",
+			"ABI" : [{"constant":false,"inputs":[],"name":"kill","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"greet","outputs":[{"name":"","type":"string"}],"type":"function"},{"inputs":[{"name":"_greeting","type":"string"}],"type":"constructor"}],
+			"Chatboard" : true,
+			"Logo" : "https://www.inzhoop.com/dappleths/dapp_1/logo.png",
+			"Description" : "Hello demo",
+			"InstallUrl" : "/dapp_1/index.html",
+			"TemplateUrl" : "/dapp_1/index.html",
+			"ScriptUrl" : "/dapp_1/index.js"
+		}]
+}		
+		
