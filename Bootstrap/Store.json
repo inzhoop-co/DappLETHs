@@ -16,7 +16,7 @@
 			"Address" : "0xf8374f01dd4960a6ea6192f36f451e111cabf3b3",
 			"ABI" : [{"constant":false,"inputs":[],"name":"kill","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"greet","outputs":[{"name":"","type":"string"}],"type":"function"},{"inputs":[{"name":"_greeting","type":"string"}],"type":"constructor"}],
 			"Chatboard" : true,
-			"Logo" : "/dapp_1/logo.png",
+			"Logo" : "https://raw.githubusercontent.com/inzhoop-co/DappLETHs/master/Bootstrap/dapp_1/logo.png",
 			"Description" : "Test Development",
 			"InstallUrl" : "/dapp_1/index.html",
 			"TemplateUrl" : "/dapp_1/index.html",
