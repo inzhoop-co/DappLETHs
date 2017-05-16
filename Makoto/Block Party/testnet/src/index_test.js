@@ -186,14 +186,7 @@ var dappleth = (function(){
         var callback = function (err, txhash) {
             if(err){
 	            console.log('error: ' + err);
-
-            	var mE = {
-					from: dappContract.address,
-			    	text: "Ops! <b>" + err + "</b>",
-			    	date: new Date()
-				};
-
-	      		apiChat.sendDappMessage(mE, GUID);
+				sendMessage(dappContract.address,"Ops! <b>" + err + "</b>");
             }
 
             console.log('txhash: ' + txhash);
