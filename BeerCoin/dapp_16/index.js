@@ -14,52 +14,31 @@ var dappleth = (function(){
 		btnRight = angular.element(document.querySelector('#rightButton'));
 		btnLeft = angular.element(document.querySelector('#leftButton'));
 		btnCenter = angular.element(document.querySelector('#centerButton'));
-
+		
 	}
 
 	function setup(){
-		console.log("setup");
+		btnLeft.html(' Check');
+		btnLeft.attr('class','button button-smal button-icon icon ion-ios-camera');
+		btnLeft.attr('onclick','dappleth.check()');
+
+		btnCenter.html(' Debtors');
+        btnCenter.attr('class','button button-smal button-icon icon ion-ios-people');
+		btnCenter.attr('onclick','dappleth.listDebtors()');
 		
-		for (var i = 0; i < dappContract.abi.length; i++) {
-            if(dappContract.abi[i].type=="function"){
-	            if (dappContract.abi[i].constant==true) {
-					console.log(dappContract.abi[i].name + " [read]");
-	            }
-	            if (dappContract.abi[i].constant==false) {
-					console.log(dappContract.abi[i].name + " [write]");
-	            }
-            }
-
-        }
-
-		/*
-		btnLeft.html(' Run');
-		btnLeft.attr('class','button button-smal button-icon icon ion-play');
-		btnLeft.attr('onclick','dappleth.run()');
-
-		btnCenter.html(' Update');
-		btnCenter.attr('class','button button-smal button-icon icon ion-play');
-		btnCenter.attr('onclick','dappleth.update()');
-
-		btnRight.html(' Run');
-		btnRight.attr('class','button button-smal button-icon icon ion-play');
-		btnRight.attr('onclick','dappleth.run()');
-		*/
+		btnRight.html(' Owe');
+        btnRight.attr('class','button button-smal button-icon icon ion-ios-play');
+		btnRight.attr('onclick','dappleth.owe()');
 
 	}
 
 	function update(){
-		console.log("update");
 		apiUI.loadFade("loading...",500);
 		
-
 		angular.element(document.querySelector('#totSupply')).html(dappContract.totalSupply().toNumber());
 		angular.element(document.querySelector('#totDebt')).html(dappContract.totalDebt().toNumber());
 		angular.element(document.querySelector('#balance')).html(dappContract.balanceOf(apiApp.account()).toNumber());
-		angular.element(document.querySelector('#numDebtors')).html(dappContract.numDebtors().toNumber());
-
-		console.log(dappContract.debtors(apiApp.account()));
-		console.log(dappContract.accounts);
+		angular.element(document.querySelector('#numDebtors')).html(dappContract.numDebtors(apiApp.account()).toNumber());
 
 	}
 
@@ -117,11 +96,67 @@ var dappleth = (function(){
 	  	update();
 	}
 
+	function check(){
+		apiUI.scanQR().then(function(res){
+			if(res){
+				var addr = res.split('#')[0];
+				var bal = dappContract.balanceOf(addr).toNumber();
+				sendMessage(dappContract.address,"Address scanned <b>" + addr + "</b>");
+				sendMessage(addr,"My balance is " + bal);
+			}
+
+		});   
+	}
+
+	function listDebtors(){
+		var debtors = dappContract.debtors(apiApp.account());
+		if(debtors.length)
+			sendMessage(dappContract.address,debtors.length + " friends owe you a beer, right?");
+		else
+			sendMessage(dappContract.address,"No beer for you!");
+
+		angular.forEach(debtors, function(value, key) {
+            sendMessage(value,"I owe you a beer!");
+        });
+	}
+
+	function transferCoin(contract, nameSend, from, to, amount){
+        var fromAddr = from;
+        var toAddr = to;
+        var functionName = nameSend;
+        var args = JSON.parse('[]');
+        var gasPrice = web3.eth.gasPrice;
+        var estimateGas = web3.eth.estimateGas({from: fromAddr, gasPrice: gasPrice, gas: gas});
+        var gas = 3000000; 
+        try {
+          args.push(toAddr,amount,{from: fromAddr, gasPrice: gasPrice, gas: gas});
+          var callback = function (err, hash) {
+			if(!err)
+				sendMessage(apiApp.account(), "I owe you a beer!");
+          }
+          args.push(callback);
+          contract[functionName].apply(this, args);
+        } catch (e) {
+            sendError(dappContract.address,e);
+        }
+	}
+
+	function owe() {
+		apiUI.scanQR().then(function(res){
+			if(res){
+				var OweTo = res.split('#')[0];
+				transferCoin(dappContract, "transfer", apiApp.account(), OweTo, 1);
+			}
+		});
+    }
 
 	return {
 	    update: update,
 	    destroy: destroy,
-	    run: run
+	    run: run,
+	    check: check,
+	    owe: owe,
+	    listDebtors: listDebtors
 	};
 
 })();
